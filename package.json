@@ -1,0 +1,29 @@
+{
+  "name": "semana-santa-proyecto",
+  "version": "1.0.0",
+  "description": "Ahora ha llegado el momento de aprovechar la semana santa y poner tus habilidades como Jedi a prueba con este proyecto.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:upgrade-hub/fsd-pt-nov-2020/node.js/semana-santa-proyecto.git"
+  },
+  "author": "LGLizarribar",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.4.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.12.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
