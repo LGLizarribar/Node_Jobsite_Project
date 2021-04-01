@@ -1,5 +1,7 @@
 const express = require('express');
 const indexRoutes = require('./routes/index.routes');
+const db = require('./db.js');
+db.connect();
 
 const PORT = 3000;
 
