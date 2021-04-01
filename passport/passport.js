@@ -19,7 +19,7 @@ const registerEstrategy = new LocalStrategy({
     passReqToCallback: true,
 }, async (req, email, password, done) => {
     try {
-        const previousUser = await User.findOne({email})
+        const previousUser = await User.findOne({email});
 
         if(previousUser){
             const error = new Error('User already exists!')
@@ -35,11 +35,41 @@ const registerEstrategy = new LocalStrategy({
 
         const savedUser = await newUser.save();
 
-        done(null, savedUser);
+        return done(null, savedUser);
 
     } catch(error) {
         return done(error);
     }
-})
+});
+
+const loginStrategy = new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true,
+
+}, async (req, email, password, done ) => {
+    try {
+        const currentUser = await User.findOne({email});
+
+        if(!currentUser) {
+            const error = new Error('Email or password not valid');
+            return done(error);
+        }
+
+        const isValidPassword = await bcrypt.compare(password, currentUser.password);
+
+        if (!isValidPassword) {
+            const error = new Error('Email or password not valid');
+            return done(error);
+        }
+
+        return done(null, currentUser),
+
+    } catch(error) {
+        return done(error);
+    }
+});
+
+passport.use('login', loginStrategy);
 
 passport.use('register', registerEstrategy);
