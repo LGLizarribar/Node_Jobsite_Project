@@ -1,11 +1,14 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const indexRoutes = require('./routes/index.routes');
 const jobsRoutes = require('./routes/jobs.routes');
 const registerRoutes = require('./routes/register.routes');
 const loginRoutes = require('./routes/login.routes');
 const db = require('./db.js');
+
 
 require('./passport/passport');
 
@@ -22,6 +25,7 @@ app.use(session({
     cookie: {
         maxAge: 48 * 60 * 60 * 1000
     },
+    store: MongoStore.create({ mongoUrl: db.DB_URL }),
 }));
 
 app.use(passport.initialize());
