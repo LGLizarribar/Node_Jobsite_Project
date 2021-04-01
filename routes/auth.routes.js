@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const User = require('../models/User');
 
 const router = express.Router();
 
@@ -53,6 +54,21 @@ router.post('/logout', (req, res, next) => {
         return res.json('User succesfully logged out');
     }
     return res.json('No user found');
-})
+});
+
+router.delete('/delete-user/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const deletedUser = await User.findByIdAndDelete(id);
+
+        if(deletedUser) return res.status(200).json('User deleted');
+
+        return res.status(404).json('User not found');
+
+    } catch(error) {
+        next(error);
+    }
+});
 
 module.exports = router;
