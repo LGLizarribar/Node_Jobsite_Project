@@ -32,6 +32,7 @@ const registerEstrategy = new LocalStrategy({
     passReqToCallback: true,
 }, async (req, email, password, done) => {
     try {
+        const { subRole } = req.body
         const previousUser = await User.findOne({email});
 
         if(previousUser){
@@ -40,10 +41,13 @@ const registerEstrategy = new LocalStrategy({
         }
 
         const hash = await bcrypt.hash(password, SALT_ROUNDS);
+        const role = "userRole";
 
         const newUser = new User({
             email,
             password: hash,
+            subRole,
+            role,
         });
 
         const savedUser = await newUser.save();
