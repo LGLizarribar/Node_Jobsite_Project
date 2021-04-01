@@ -43,4 +43,16 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
+router.post('/logout', (req, res, next) => {
+    if(req.user) {
+        req.logout();
+
+        req.session.destroy(() => {
+            res.clearCookie('connect.sid');
+        })
+        return res.json('User succesfully logged out');
+    }
+    return res.json('No user found');
+})
+
 module.exports = router;
