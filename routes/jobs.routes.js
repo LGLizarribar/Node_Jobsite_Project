@@ -6,12 +6,28 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
     try{
         const jobOffers = await JobOffer.find();
-        return res.json(jobOffers);
+        return res.render('jobs', {jobOffers: jobOffers});
 
     } catch(error){
         next(error);
     }
 });
+
+router.get('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const job = await JobOffer.findById(id);
+
+        if(job) {
+            return res.render('job', {job});
+        }
+
+        return res.status(404).json('No job found for this ID');
+
+    } catch(error) {
+        next(error);
+    }
+})
 
 
 router.post('/add-offer', async (req, res, next) => {

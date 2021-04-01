@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{#if job.position}}
+        <title>{{job.position}}</title>
+    {{else}}
+        <title>Job Offer</title>
+    {{/if}}
+</head>
+<body>
+    <a href="/jobs">Volver</a>
+    {{#if job}}
+        <h1>{{job.position}}</h1>
+        <h4>Company: {{job.company}}</h4>
+        <p>Description: {{job.description}}</p>
+        {{#if job.location}}
+            <p>Location: {{job.location}}</p>
+        {{/if}}
+        <p>Contact: {{job.contactEmail}}</p>
+    {{else}}
+        <h3>Offer not found</h3>
+    {{/if}}
+</body>
+</html>
