@@ -9,13 +9,13 @@ router.post('/', (req, res, next) => {
     console.log('Registering user...', req.body);
 
     if(!email || !password) {
-        const error = new Error('No user or password found');
-        return res.send(200).json(error);
+        const error = new Error('User and password are required');
+        return res.send(200).json(error.message);
     }
 
     passport.authenticate('register', (error, user) => {
         if(error) {
-            return res.send(error);
+            return res.json(error.message);
         }
         return res.send(user);
     })(req);
