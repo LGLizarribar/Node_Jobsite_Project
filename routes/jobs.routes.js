@@ -31,8 +31,7 @@ router.post('/add-offer', async (req, res, next) => {
 
 router.put('/edit-offer', async (req, res, next) => {
     try {
-        const {id} = req.body;
-        const { position, company, description, contactEmail, location } = req.body;
+        const { id, position, company, description, contactEmail, location } = req.body;
 
         const updatedJobOffer = await JobOffer.findByIdAndUpdate(id,
             { position, company, description, contactEmail, location },
@@ -46,5 +45,20 @@ router.put('/edit-offer', async (req, res, next) => {
         next(error);
     }
 });
+
+router.delete('/delete-offer/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const deleted = await JobOffer.findByIdAndDelete(id);
+
+        if(deleted) return res.status(200).json('Offer deleted');
+
+        return res.status(404).json('Offer not found');
+
+    } catch(error){
+        next(error);
+    }
+})
 
 module.exports = router;
