@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -26,6 +26,9 @@ app.use(session({
     },
     store: MongoStore.create({ mongoUrl: db.DB_URL }),
 }));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 app.use(passport.initialize());
 app.use(passport.session());
