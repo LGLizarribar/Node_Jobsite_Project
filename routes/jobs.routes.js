@@ -29,4 +29,22 @@ router.post('/add-offer', async (req, res, next) => {
     }
 });
 
+router.put('/edit-offer', async (req, res, next) => {
+    try {
+        const {id} = req.body;
+        const { position, company, description, contactEmail, location } = req.body;
+
+        const updatedJobOffer = await JobOffer.findByIdAndUpdate(id,
+            { position, company, description, contactEmail, location },
+            {
+                new: true
+            });
+
+            return res.status(200).json(updatedJobOffer);
+
+    } catch(error) {
+        next(error);
+    }
+});
+
 module.exports = router;
