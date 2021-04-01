@@ -22,7 +22,7 @@ router.post('/', (req, res, next) => {
             }
             return res.json(user);
         })
-    })(req);
+    })(req, res, next);
 })
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const session = require('express-session');
 const indexRoutes = require('./routes/index.routes');
 const jobsRoutes = require('./routes/jobs.routes');
 const registerRoutes = require('./routes/register.routes');
@@ -14,7 +15,18 @@ const PORT = 3000;
 
 const app = express();
 
+app.use(session({
+    secret: 'sdbaljsf*2524@',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 48 * 60 * 60 * 1000
+    },
+}));
+
 app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

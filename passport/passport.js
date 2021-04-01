@@ -11,6 +11,19 @@ const User = require('../models/User');
  * }
  */
 
+passport.serializeUser((user, done) => {
+    return done(null, user._id);
+});
+
+passport.deserializeUser(async (userId, done) => {
+    try {
+        const existingUser = await User.findById(userId);
+        return done(null, existingUser);
+    } catch(error) {
+        return done(error);
+    }
+});
+
 const SALT_ROUNDS = 10;
 
 const registerEstrategy = new LocalStrategy({
