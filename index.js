@@ -3,6 +3,7 @@ const passport = require('passport');
 const indexRoutes = require('./routes/index.routes');
 const jobsRoutes = require('./routes/jobs.routes');
 const registerRoutes = require('./routes/register.routes');
+const loginRoutes = require('./routes/login.routes');
 const db = require('./db.js');
 
 require('./passport/passport');
@@ -21,6 +22,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/', indexRoutes);
 app.use('/jobs', jobsRoutes);
 app.use('/register', registerRoutes);
+app.use('/login', loginRoutes);
 
 
 app.use('*', (req, res, next) => {
