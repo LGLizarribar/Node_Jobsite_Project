@@ -1,5 +1,6 @@
 const express = require('express');
 const indexRoutes = require('./routes/index.routes');
+const jobsRoutes = require('./routes/jobs.routes');
 const db = require('./db.js');
 db.connect();
 
@@ -8,6 +9,7 @@ const PORT = 3000;
 const app = express();
 
 app.use('/', indexRoutes);
+app.use('/jobs', jobsRoutes);
 
 
 app.use('*', (req, res, next) => {
