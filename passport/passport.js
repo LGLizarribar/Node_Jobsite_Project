@@ -63,7 +63,7 @@ const loginStrategy = new LocalStrategy({
             return done(error);
         }
 
-        return done(null, currentUser),
+        return done(null, currentUser);
 
     } catch(error) {
         return done(error);
