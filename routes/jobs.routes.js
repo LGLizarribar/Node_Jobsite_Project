@@ -14,21 +14,6 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const job = await JobOffer.findById(id);
-
-        if(job) {
-            return res.render('job', {job});
-        }
-
-        return res.status(404).json('No job found for this ID');
-
-    } catch(error) {
-        next(error);
-    }
-})
 
 router.get('/add-offer', (req, res, next) => {
     console.log('rendering');
@@ -115,6 +100,22 @@ router.delete('/delete-offer/:id', async (req, res, next) => {
         } catch(error){
             next(error);
         }
+    }
+})
+
+router.get('/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const job = await JobOffer.findById(id);
+
+        if(job) {
+            return res.render('job', {job});
+        }
+
+        return res.status(404).json('No job found for this ID');
+
+    } catch(error) {
+        next(error);
     }
 })
 
