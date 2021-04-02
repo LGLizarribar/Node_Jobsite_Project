@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
+const sassMiddleware = require('node-sass-middleware');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const indexRoutes = require('./routes/index.routes');
@@ -26,6 +27,17 @@ app.use(session({
     },
     store: MongoStore.create({ mongoUrl: db.DB_URL }),
 }));
+
+app.use(
+    sassMiddleware({
+        src: path.join(__dirname, 'public'),
+        dest: path.join(__dirname, 'public'),
+        debug: false,
+        outputStyle: 'compressed',
+    })
+);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
