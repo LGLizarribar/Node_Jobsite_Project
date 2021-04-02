@@ -4,26 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Offers</title>
+    <title>Empleos</title>
 </head>
 <body>
     <header class="header">
-
+        <navbar class="navbar">
+            <span>
+                <a href="/">Volver</a>
+            </span>
+            <span>
+                <a href="/jobs/add-offer">Crea una nueva oferta de empleo</a>
+            </span>
+        </navbar>
     </header>
     <main>
-        <h1>Current Offers</h1>
-        <span>
-            <a href="/">Volver</a>
-        </span>
-        <span>
-            <a href="/jobs/add-offer">Post a new job offer</a>
-        </span>
-
+        <div>
+            <h1>Nuestras Ofertas de Empleo
+        </div>
         <ul>
             {{#each jobOffers}}
                 <li>
-                    <h3>Position: <a href="/jobs/{{_id}}">{{position}}</a></h3>
-                    <h4>Company: {{company}}</h4>
+                    <h3>Puesto: <a href="/jobs/{{_id}}">{{position}}</a></h3>
+                    <h4>Empresa: {{company}}</h4>
                 </li>
             {{/each}}
         </ul>

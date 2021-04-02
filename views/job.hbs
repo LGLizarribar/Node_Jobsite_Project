@@ -7,21 +7,27 @@
     {{#if job.position}}
         <title>{{job.position}}</title>
     {{else}}
-        <title>Job Offer</title>
+        <title>Oferta de Empleo</title>
     {{/if}}
 </head>
 <body>
-    <a href="/jobs">Volver</a>
-    {{#if job}}
-        <h1>{{job.position}}</h1>
-        <h4>Company: {{job.company}}</h4>
-        <p>Description: {{job.description}}</p>
-        {{#if job.location}}
-            <p>Location: {{job.location}}</p>
+    <header class="header">
+        <navbar class="navbar">
+            <a href="/jobs">Volver</a>
+        </navbar>
+    </header>
+    <main class="container">
+        {{#if job}}
+            <h1>{{job.position}}</h1>
+            <h4>Empresa: {{job.company}}</h4>
+            <p>Descripción: {{job.description}}</p>
+            {{#if job.location}}
+                <p>Localización: {{job.location}}</p>
+            {{/if}}
+            <p>Contacto: {{job.contactEmail}}</p>
+        {{else}}
+            <h3>Oferta no encontrada</h3>
         {{/if}}
-        <p>Contact: {{job.contactEmail}}</p>
-    {{else}}
-        <h3>Offer not found</h3>
-    {{/if}}
+    </main>
 </body>
 </html>
