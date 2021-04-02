@@ -54,34 +54,62 @@ router.post('/add-offer', async (req, res, next) => {
 });
 
 router.put('/edit-offer', async (req, res, next) => {
-    try {
-        const { id, position, company, description, contactEmail, location } = req.body;
+    const user = req.user;
+    const updaterId = user._id;
 
-        const updatedJobOffer = await JobOffer.findByIdAndUpdate(id,
-            { position, company, description, contactEmail, location },
-            {
-                new: true
-            });
+    if(user){
 
-            return res.status(200).json(updatedJobOffer);
+        try {
 
-    } catch(error) {
-        next(error);
+            const {creatorId} = await User.findOne();
+            if(creatorId === updaterId) {
+
+                const { id, position, company, description, contactEmail, location } = req.body;
+
+                const updatedJobOffer = await JobOffer.findByIdAndUpdate(id,
+                    { position, company, description, contactEmail, location },
+                    {
+                        new: true
+                    });
+
+                    return res.status(200).json(updatedJobOffer);
+            } else {
+                console.log('This user cannot update this job offer');
+                return res.redirect('/auth/login');
+            }
+
+        } catch(error) {
+            next(error);
+        }
+    } else {
+    return res.redirect('/auth/login');
     }
 });
 
 router.delete('/delete-offer/:id', async (req, res, next) => {
-    try {
-        const { id } = req.params;
+    const user = req.user;
+    const deleterId = user._id;
 
-        const deleted = await JobOffer.findByIdAndDelete(id);
+    if(user){
+        try {
+            const {creatorId} = await User.findOne();
+            if (creatorId === deleterId){
 
-        if(deleted) return res.status(200).json('Offer deleted');
-
-        return res.status(404).json('Offer not found');
-
-    } catch(error){
-        next(error);
+                const { id } = req.params;
+        
+                const deleted = await JobOffer.findByIdAndDelete(id);
+        
+                if(deleted) return res.status(200).json('Offer deleted');
+        
+                return res.status(404).json('Offer not found');
+            } else {
+                console.log('This user cannot delete this job offer');
+                return res.redirect('/auth/login');
+            }
+    
+        } catch(error){
+            next(error);
+        }
     }
 })
 
