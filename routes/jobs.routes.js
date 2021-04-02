@@ -68,7 +68,7 @@ router.put('/edit-offer', async (req, res, next) => {
             const { id, position, company, description, contactEmail, location } = req.body;
             const { creatorId } = await JobOffer.findById(id);
             console.log(creatorId);
-            if(creatorId === updaterId) {
+            if(creatorId.equals(updaterId)) {
 
                 const updatedJobOffer = await JobOffer.findByIdAndUpdate(id,
                     { position, company, description, contactEmail, location },
@@ -100,19 +100,18 @@ router.delete('/delete-offer/:id', async (req, res, next) => {
             const { id } = req.params;
             const { creatorId } = await JobOffer.findById(id);
             console.log(creatorId);
-            if (creatorId === deleterId){
+            if (creatorId.equals(deleterId)){
 
-        
                 const deleted = await JobOffer.findByIdAndDelete(id);
-        
+
                 if(deleted) return res.status(200).json('Offer deleted');
-        
+
                 return res.status(404).json('Offer not found');
             } else {
                 console.log('This user cannot delete this job offer');
                 return res.redirect('/auth/login');
             }
-    
+
         } catch(error){
             next(error);
         }
