@@ -30,13 +30,16 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
+router.get('/add-offer', (req, res, next) => {
+    console.log('rendering');
+    return res.render('add-offer');
+})
 
 router.post('/add-offer', async (req, res, next) => {
     const user = req.user;
     const creatorId = user._id;
     if(user){
         try {
-            //const userId = await User.findOne{ _id : user };
             const { position, company, description, contactEmail, location } = req.body;
 
             const newJobOffer = new JobOffer({creatorId, position, company, description, contactEmail, location });
@@ -56,15 +59,16 @@ router.post('/add-offer', async (req, res, next) => {
 router.put('/edit-offer', async (req, res, next) => {
     const user = req.user;
     const updaterId = user._id;
+    console.log('Updater ID: ', updaterId);
 
     if(user){
 
         try {
 
-            const {creatorId} = await User.findOne();
+            const { id, position, company, description, contactEmail, location } = req.body;
+            const { creatorId } = await JobOffer.findById(id);
+            console.log(creatorId);
             if(creatorId === updaterId) {
-
-                const { id, position, company, description, contactEmail, location } = req.body;
 
                 const updatedJobOffer = await JobOffer.findByIdAndUpdate(id,
                     { position, company, description, contactEmail, location },
@@ -89,13 +93,15 @@ router.put('/edit-offer', async (req, res, next) => {
 router.delete('/delete-offer/:id', async (req, res, next) => {
     const user = req.user;
     const deleterId = user._id;
+    console.log(deleterId);
 
     if(user){
         try {
-            const {creatorId} = await User.findOne();
+            const { id } = req.params;
+            const { creatorId } = await JobOffer.findById(id);
+            console.log(creatorId);
             if (creatorId === deleterId){
 
-                const { id } = req.params;
         
                 const deleted = await JobOffer.findByIdAndDelete(id);
         
