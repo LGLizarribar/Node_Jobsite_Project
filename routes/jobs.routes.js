@@ -1,6 +1,7 @@
 const express = require('express');
 const JobOffer = require('../models/JobOffer');
 const db = require('../db');
+const User = require('../models/User');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -31,17 +32,24 @@ router.get('/:id', async (req, res, next) => {
 
 
 router.post('/add-offer', async (req, res, next) => {
-    try {
-        const { position, company, description, contactEmail, location } = req.body;
+    const user = req.user;
+    const creatorId = user._id;
+    if(user){
+        try {
+            //const userId = await User.findOne{ _id : user };
+            const { position, company, description, contactEmail, location } = req.body;
 
-        const newJobOffer = new JobOffer({ position, company, description, contactEmail, location });
+            const newJobOffer = new JobOffer({creatorId, position, company, description, contactEmail, location });
 
-        const savedJobOffer = await newJobOffer.save();
+            const savedJobOffer = await newJobOffer.save();
 
-        return res.status(201).json(savedJobOffer);
+            return res.status(201).json(savedJobOffer);
 
-    } catch(error) {
-        next(error);
+        } catch(error) {
+            next(error);
+        }
+    } else {
+        return res.redirect('/auth/login');
     }
 });
 
