@@ -4,6 +4,10 @@ const User = require('../models/User');
 
 const router = express.Router();
 
+router.get('/register', (req, res, next) => {
+    return res.render('register');
+})
+
 router.post('/register', (req, res, next) => {
     const { email, password } = req.body;
 
@@ -11,16 +15,20 @@ router.post('/register', (req, res, next) => {
 
     if(!email || !password) {
         const error = new Error('User and password are required');
-        return res.send(200).json(error.message);
+        return res.render('register', {error: error.message});
     }
 
     passport.authenticate('register', (error, user) => {
         if(error) {
-            return res.json(error.message);
+            return res.render('register', {error: error.message});
         }
-        return res.send(user);
+        return res.redirect('/auth/login');
     })(req);
 });
+
+router.get('/login', (req, res, next) => {
+    return res.render('login');
+})
 
 router.post('/login', (req, res, next) => {
     const { email, password } = req.body;
@@ -28,18 +36,18 @@ router.post('/login', (req, res, next) => {
 
     if(!email || !password) {
         const error = new Error('User and password are required');
-        return res.json(error.message);
+        return res.render('login', {error: error.message});
     }
 
     passport.authenticate('login', (error, user) => {
         if(error) {
-            return res.json(error.message);
+            return res.render('login', {error: error.message});
         }
         req.logIn(user, (error) => {
             if(error){
-                return res.json(error.message);
+                return res.render('login', {error: error.message});
             }
-            return res.json(user);
+            return res.redirect('/jobs');
         })
     })(req, res, next);
 });
@@ -50,10 +58,11 @@ router.post('/logout', (req, res, next) => {
 
         req.session.destroy(() => {
             res.clearCookie('connect.sid');
+            return res.redirect('/');
         })
-        return res.json('User succesfully logged out');
+    } else {
+    return res.redirect('/auth/login');
     }
-    return res.json('No user found');
 });
 
 router.delete('/delete-user/:id', async (req, res, next) => {
