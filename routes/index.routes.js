@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+    const user = req.user;
     return res.render('index', {
-        title: 'Welcome to JobFinder',
-        content: "If you're searching for your dream job, you're in the right place!"
+        title: 'Bienvenido a JobFinder',
+        content: "Si estás buscando tu trabajo soñado, ¡estás en el lugar adecuado!",
+        user: req.user,
     })
 });
 

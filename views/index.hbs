@@ -4,19 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
     <title>{{title}}</title>
 </head>
 <body>
     <header class="header">
-        <span class="header__link">
-            <a href="/auth/login">Log In</a>
-        </span>
-        <span class="header__link">
-            <a href="/auth/register">New Account</a>
-        </span>
-        <span class="header__link">
-            <a href="/jobs">Job Offers</a>
-        </span>
+        {{#if user}}
+            <navbar class="navbar">
+                <h1>Bienvenido de nuevo</h1>
+                <form action="/auth/logout" method="POST">
+                    <button type="submit">Logout</button>
+                </form>
+                    <span class="header__link">
+                        <a href="/jobs">Ofertas de Trabajo</a>
+                    </span>
+            </navbar>
+        {{else}}
+            <navbar class="navbar">
+                <span class="header__link">
+                    <a href="/auth/login">Acceso</a>
+                </span>
+                <span class="header__link">
+                    <a href="/auth/register">Registro</a>
+                </span>
+            </navbar>
+        {{/if}}
     </header>
     <main>
         <h1>{{title}}</h1>
