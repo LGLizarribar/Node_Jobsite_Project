@@ -22,6 +22,11 @@
             <input type="text" id="email" name="email">
             <label for="password">Password</label>
             <input type="password" id="password" name="password">
+            <label for="subRole">¿Buscas talento o trabajo?</label>
+            <select id="subRole" name="subRole">
+                <option value="company">Talento</option>
+                <option value="candidate">Trabajo</option>
+            </select>
             <button type="submit">Enviar</button>
         </form>
         {{#if error}}
