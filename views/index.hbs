@@ -9,30 +9,38 @@
 </head>
 <body>
     <header class="header">
-        {{#if user}}
-            <navbar class="navbar">
-                <h1>Bienvenido de nuevo</h1>
-                <form action="/auth/logout" method="POST">
-                    <button type="submit">Logout</button>
-                </form>
-                    <span class="header__link">
-                        <a href="/jobs">Ofertas de Trabajo</a>
+        <span class="header__logo-container">
+            <img class="header__logo" src="./images/logo.png" alt="JobFinder logo">
+        </span>
+        <span>
+            <h1 class="header__title">JobFinder</h1>
+        </span>
+        <span class="header__navbar-container">
+            {{#if user}}
+                <navbar class="navbar">
+                    <span class="navbar__link-container">
+                        <a class="navbar__link" href="/jobs">Ofertas de Trabajo</a>
                     </span>
-            </navbar>
-        {{else}}
-            <navbar class="navbar">
-                <span class="header__link">
-                    <a href="/auth/login">Acceso</a>
-                </span>
-                <span class="header__link">
-                    <a href="/auth/register">Registro</a>
-                </span>
-            </navbar>
-        {{/if}}
+                    <form class="navbar__link-container" action="/auth/logout" method="POST">
+                        <button class="navbar__link" type="submit">Logout</button>
+                    </form>
+                </navbar>
+            {{else}}
+                <navbar class="navbar">
+                    <span class="navbar__link-container">
+                        <a class="navbar__link" href="/auth/login">Acceso</a>
+                    </span>
+                    <span class="navbar__link-container">
+                        <a class="navbar__link" href="/auth/register">Registro</a>
+                    </span>
+                </navbar>
+            {{/if}}
+
+        </span>
     </header>
-    <main>
-        <h1>{{title}}</h1>
-        <p>{{content}}</p>
+    <main class="main">
+        <h1 class="main__title">{{title}}</h1>
+        <p class="main__content">{{content}}</p>
     </main>
 </body>
 </html>

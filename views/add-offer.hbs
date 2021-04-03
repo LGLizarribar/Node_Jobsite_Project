@@ -4,31 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
     <title>Add a new offer</title>
 </head>
 <body>
     <header class="header">
-        <navbar class="navbar">
-            <div>
-                <a href="/auth/login">Acceso</a>
-                <a href="/">Inicio</a>
-            </div>
-        </navbar>
+        <span class="header__logo-container">
+            <img class="header__logo" src="/images/logo.png" alt="JobFinder logo">
+        </span>
+        <span>
+            <h1 class="header__title">JobFinder</h1>
+        </span>
+        <span class="header__navbar-container">
+            <navbar class="navbar">
+                <div>
+                    <a class="navbar__link" href="/auth/login">Acceso</a>
+                    <a class="navbar__link" href="/">Inicio</a>
+                </div>
+            </navbar>
+        </span>
     </header>
 
     <div class="form-container">
         <form class="form-container__form" action="/jobs/add-offer" method="POST">
-            <label for="position">Puesto</label>
-            <input type="text" id="position" name="position">
-            <label for="company">Empresa</label>
-            <input type="text" id="company" name="company">
-            <label for="description">Descripción</label>
-            <input type="text" id="description" name="description">
-            <label for="location">Localidad</label>
-            <input type="text" id="location" name="location">
-            <label for="contactEmail">Email de contacto</label>
-            <input type="text" id="contactEmail" name="contactEmail">
-            <button type="submit">Enviar</button>
+            <span class="form-container__field">
+                <label for="position">Puesto</label>
+                <input type="text" id="position" name="position">
+            </span>
+            <span class="form-container__field">
+                <label for="company">Empresa</label>
+                <input type="text" id="company" name="company">
+            </span>
+            <span class="form-container__field">
+                <label for="description">Descripción</label>
+                <textarea id="description" name="description" rows='4' cols='50'></textarea>
+            </span>
+            <span class="form-container__field">
+                <label for="location">Localidad</label>
+                <input type="text" id="location" name="location">
+            </span>
+            <span class="form-container__field">
+                <label for="contactEmail">Email de contacto</label>
+                <input type="text" id="contactEmail" name="contactEmail">
+            </span>
+            <button class="form-container__button" type="submit">Enviar</button>
         </form>
         {{#if error}}
             <div>

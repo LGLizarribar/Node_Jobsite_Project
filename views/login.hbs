@@ -4,25 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
     <title>Log In</title>
 </head>
 <body>
     <header class="header">
-        <navbar class="navbar">
-            <div>
-                <a href="/auth/register">Regístrate</a>
-                <a href="/">Inicio</a>
-            </div>
-        </navbar>
+        <span class="header__logo-container">
+            <img class="header__logo" src="/images/logo.png" alt="JobFinder logo">
+        </span>
+        <span>
+            <h1 class="header__title">JobFinder</h1>
+        </span>
+        <span class="header__navbar-container">
+            <navbar class="navbar">
+                <div>
+                    <a class="navbar__link" href="/auth/register">Regístrate</a>
+                    <a class="navbar__link" href="/">Inicio</a>
+                </div>
+            </navbar>
+        </span>
     </header>
 
     <div class="form-container">
         <form class="form-container__form" action="/auth/login" method="POST">
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
-            <button type="submit">Enviar</button>
+            <span class="form-container__field">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
+            </span>
+            <span class="form-container__field">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password">
+            </span>
+            <button class="form-container__button" type="submit">Entrar</button>
         </form>
         {{#if error}}
             <div>

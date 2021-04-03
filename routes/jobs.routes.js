@@ -16,7 +16,6 @@ router.get('/', async (req, res, next) => {
 
 
 router.get('/add-offer', (req, res, next) => {
-    console.log('rendering');
     return res.render('add-offer');
 })
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
     {{#if job.position}}
         <title>{{job.position}}</title>
     {{else}}
@@ -12,21 +13,29 @@
 </head>
 <body>
     <header class="header">
-        <navbar class="navbar">
-            <a href="/jobs">Volver</a>
-        </navbar>
+        <span class="header__logo-container">
+            <img class="header__logo" src="/images/logo.png" alt="JobFinder logo">
+        </span>
+        <span>
+            <h1 class="header__title">JobFinder</h1>
+        </span>
+        <span class="header__navbar-container">
+            <navbar class="navbar">
+                <a class="navbar__link" href="/jobs">Volver</a>
+            </navbar>
+        </span>
     </header>
-    <main class="container">
+    <main class="main-offers">
         {{#if job}}
-            <h1>{{job.position}}</h1>
-            <h4>Empresa: {{job.company}}</h4>
-            <p>Descripción: {{job.description}}</p>
+            <h1 class="main-offers__title">{{job.position}}</h1>
+            <h4 class="main-offers__content">Empresa: {{job.company}}</h4>
+            <p class="main-offers__content">Descripción: {{job.description}}</p>
             {{#if job.location}}
-                <p>Localización: {{job.location}}</p>
+                <p class="main-offers__content">Localización: {{job.location}}</p>
             {{/if}}
-            <p>Contacto: {{job.contactEmail}}</p>
+            <p class="main-offers__content">Contacto: {{job.contactEmail}}</p>
             <form action="/jobs/apply/{{job._id}}?_method=PUT" method="POST">
-                <button type="submit">Apply</button>
+                <button class="form-container__button" type="submit">Apply</button>
             </form>
         {{else}}
             <h3>Oferta no encontrada</h3>

@@ -4,28 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
     <title>Empleos</title>
 </head>
 <body>
     <header class="header">
-        <navbar class="navbar">
-            <span>
-                <a href="/">Volver</a>
-            </span>
-            <span>
-                <a href="/jobs/add-offer">Crea una nueva oferta de empleo</a>
-            </span>
-        </navbar>
+        <span class="header__logo-container">
+            <img class="header__logo" src="/images/logo.png" alt="JobFinder logo">
+        </span>
+        <span>
+            <h1 class="header__title">JobFinder</h1>
+        </span>
+        <span class="header__navbar-container">
+            <navbar class="navbar">
+                <span>
+                    <a class="navbar__link" href="/">Volver</a>
+                </span>
+                <span>
+                    <a class="navbar__link" href="/jobs/add-offer">Crea una nueva oferta de empleo</a>
+                </span>
+            </navbar>
+        </span> 
     </header>
-    <main>
+    <main class="main-offers">
         <div>
-            <h1>Nuestras Ofertas de Empleo
+            <h1 class="main-offers__title">Nuestras Ofertas de Empleo
         </div>
         <ul>
             {{#each jobOffers}}
                 <li>
-                    <h3>Puesto: <a href="/jobs/{{_id}}">{{position}}</a></h3>
-                    <h4>Empresa: {{company}}</h4>
+                    <h3 class="main-offers__content">Puesto: <a href="/jobs/{{_id}}">{{position}}</a></h3>
+                    <h4 class="main-offers__content">Empresa: {{company}}</h4>
                 </li>
             {{/each}}
         </ul>
