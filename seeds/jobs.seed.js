@@ -5,18 +5,21 @@ const JobOffer = require('../models/JobOffer');
 
 const jobOffers = [
     {
+        creatorId: '6066ff5b1a93cae26ff59fbc',
         position: 'Junior Front-End Developer',
         company: 'Google',
         description: 'Junior at Google',
         contactEmail: 'junior@google.com',
         location: 'Madrid'
     },{
+        creatorId: '6066ff5b1a93cae26ff59fbc',
         position: 'senior Full-Stack Developer',
         company: 'Microsoft',
         description: 'Senior at Microsoft',
         contactEmail: 'senior@microsoft.com',
         location: 'Barcelona'
     },{
+        creatorId: '6066ff5b1a93cae26ff59fbc',
         position: 'Junior Full-Stack Developer',
         company: 'Spotify',
         description: 'Junior at Spotify',

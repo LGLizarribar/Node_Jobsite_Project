@@ -20,9 +20,25 @@
             <h1 class="header__title">JobFinder</h1>
         </span>
         <span class="header__navbar-container">
-            <navbar class="navbar">
-                <a class="navbar__link" href="/jobs">Volver</a>
-            </navbar>
+            {{#if user}}
+                <navbar class="navbar">
+                    <span>
+                        <a class="navbar__link" href="/">Volver</a>
+                    </span>
+                    <form class="navbar__link-container" action="/auth/logout" method="POST">
+                        <button class="navbar__link" type="submit">Logout</button>
+                    </form>
+                </navbar>
+            {{else}}
+                <navbar class="navbar">
+                    <span class="navbar__link-container">
+                        <a class="navbar__link" href="/auth/login">Acceso</a>
+                    </span>
+                    <span class="navbar__link-container">
+                        <a class="navbar__link" href="/auth/register">Registro</a>
+                    </span>
+                </navbar>
+            {{/if}}
         </span>
     </header>
     <main class="main-offers">
@@ -37,6 +53,9 @@
             <form action="/jobs/apply/?_method=PUT" method="POST">
                 <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
                 <button class="form-container__button" type="submit">Apply</button>
+            </form>
+            <form action="/jobs/edit-offer/{{job._id}}" method="GET">
+                <button class="form-container__button" type="submit">Edit Offer</button>
             </form>
         {{else}}
             <h3>Oferta no encontrada</h3>

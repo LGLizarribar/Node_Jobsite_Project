@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
     try{
         const jobOffers = await JobOffer.find();
-        return res.render('jobs', {jobOffers: jobOffers});
+        return res.render('jobs', {jobOffers: jobOffers, user: req.user});
 
     } catch(error){
         next(error);
@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
 
 
 router.get('/add-offer', (req, res, next) => {
-    return res.render('add-offer');
+    return res.render('add-offer', {user: req.user});
 })
 
 router.post('/add-offer', async (req, res, next) => {
@@ -40,6 +40,27 @@ router.post('/add-offer', async (req, res, next) => {
     }
 });
 
+router.get('/edit-offer/:id', async (req, res, next) => {
+    if(req.user){
+        try {
+            const { id } = req.params;
+
+            const job = await JobOffer.findById(id);
+
+            if(job) {
+                return res.render('edit-offer', {job, user: req.user});
+            } else {
+                return res.status(404).json('No job found for this ID');
+            }
+
+        } catch(error){
+            next(error);
+        }
+    } else {
+        return res.redirect('/auth/login');
+    }
+})
+
 router.put('/edit-offer', async (req, res, next) => {
     const user = req.user;
     const updaterId = user._id;
@@ -60,7 +81,7 @@ router.put('/edit-offer', async (req, res, next) => {
                         new: true
                     });
 
-                    return res.status(200).json(updatedJobOffer);
+                    return res.redirect('/jobs');
             } else {
                 console.log('This user cannot update this job offer');
                 return res.redirect('/auth/login');
@@ -134,7 +155,7 @@ router.get('/:id', async (req, res, next) => {
         const job = await JobOffer.findById(id);
 
         if(job) {
-            return res.render('job', {job});
+            return res.render('job', {job, user: req.user});
         }
 
         return res.status(404).json('No job found for this ID');

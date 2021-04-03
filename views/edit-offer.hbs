@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Edit your offer</title>
+</head>
+<body>
+    <header class="header">
+        <span class="header__logo-container">
+            <img class="header__logo" src="/images/logo.png" alt="JobFinder logo">
+        </span>
+        <span>
+            <h1 class="header__title">JobFinder</h1>
+        </span>
+        <span class="header__navbar-container">
+            <navbar class="navbar">
+                <div>
+                    <a class="navbar__link" href="/jobs">Volver</a>
+                    <a class="navbar__link" href="/">Inicio</a>
+                </div>
+            </navbar>
+        </span>
+    </header>
+    <main class="main-edit_offer">
+        {{#if job}}
+        <div class="main-offers">
+            <h1 class="main-offers__title">{{job.position}}</h1>
+            <h4 class="main-offers__content">Empresa: {{job.company}}</h4>
+            <p class="main-offers__content">Descripción: {{job.description}}</p>
+            {{#if job.location}}
+                <p class="main-offers__content">Localización: {{job.location}}</p>
+            {{/if}}
+            <p class="main-offers__content">Contacto: {{job.contactEmail}}</p>
+        </div>
+        <div class="form-container">
+            <form class="form-container__form" action="/jobs/edit-offer/?_method=PUT" method="POST">
+                <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
+                <span class="form-container__field">
+                    <label for="position">Puesto</label>
+                    <input type="text" id="position" name="position">
+                </span>
+                <span class="form-container__field">
+                    <label for="company">Empresa</label>
+                    <input type="text" id="company" name="company">
+                </span>
+                <span class="form-container__field">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" name="description" rows='4' cols='50'></textarea>
+                </span>
+                <span class="form-container__field">
+                    <label for="location">Localidad</label>
+                    <input type="text" id="location" name="location">
+                </span>
+                <span class="form-container__field">
+                    <label for="contactEmail">Email de contacto</label>
+                    <input type="text" id="contactEmail" name="contactEmail">
+                </span>
+                <button class="form-container__button" type="submit">Enviar</button>
+            </form>
+            {{#if error}}
+                <div>
+                    <p>{{error}}</p>
+                </div>
+            {{/if}}
+        </div>
+        {{else}}
+            <h3>Oferta no encontrada</h3>
+        {{/if}}
+    </main>
+</body>
+</html>
