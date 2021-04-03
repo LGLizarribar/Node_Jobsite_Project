@@ -34,7 +34,8 @@
                 <p class="main-offers__content">Localización: {{job.location}}</p>
             {{/if}}
             <p class="main-offers__content">Contacto: {{job.contactEmail}}</p>
-            <form action="/jobs/apply/{{job._id}}?_method=PUT" method="POST">
+            <form action="/jobs/apply/?_method=PUT" method="POST">
+                <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
                 <button class="form-container__button" type="submit">Apply</button>
             </form>
         {{else}}

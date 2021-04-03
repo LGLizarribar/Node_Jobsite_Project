@@ -104,20 +104,21 @@ router.delete('/delete-offer/:id', async (req, res, next) => {
     }
 });
 
-router.put('/apply:id', async (req, res, next) => {
+router.put('/apply', async (req, res, next) => {
     if(req.user){
-        const applicantId = user._id;
-        const offerId = req.body._id;
-
         try {
+            const applicantId = req.user._id;
+            const { id } = req.body;
+            console.log(id);
+            console.log(applicantId);
             const appliedOffer = await JobOffer.findByIdAndUpdate(
-                offerId,
+                id,
                 {
                     $push: {applicants: applicantId}
                 },
                 { new: true }
             );
-            return res.redirect('/jobs').json('Offer aplied!');
+            return res.redirect('/jobs');
 
         } catch(error){
             next(error);
