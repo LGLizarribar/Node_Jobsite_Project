@@ -25,6 +25,9 @@
                 <p>Localización: {{job.location}}</p>
             {{/if}}
             <p>Contacto: {{job.contactEmail}}</p>
+            <form action="/jobs/apply/{{job._id}}?_method=PUT" method="POST">
+                <button type="submit">Apply</button>
+            </form>
         {{else}}
             <h3>Oferta no encontrada</h3>
         {{/if}}

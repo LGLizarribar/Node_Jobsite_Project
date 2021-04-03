@@ -100,6 +100,31 @@ router.delete('/delete-offer/:id', async (req, res, next) => {
         } catch(error){
             next(error);
         }
+    } else {
+        return res.redirect('/auth/login');
+    }
+});
+
+router.put('/apply:id', async (req, res, next) => {
+    if(req.user){
+        const applicantId = user._id;
+        const offerId = req.body._id;
+
+        try {
+            const appliedOffer = await JobOffer.findByIdAndUpdate(
+                offerId,
+                {
+                    $push: {applicants: applicantId}
+                },
+                { new: true }
+            );
+            return res.redirect('/jobs').json('Offer aplied!');
+
+        } catch(error){
+            next(error);
+        }
+    } else {
+        return res.redirect('/auth/login');
     }
 })
 
