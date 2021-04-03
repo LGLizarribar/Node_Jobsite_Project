@@ -31,7 +31,7 @@ router.post('/add-offer', async (req, res, next) => {
 
             const savedJobOffer = await newJobOffer.save();
 
-            return res.status(201).json(savedJobOffer);
+            return res.status(201).redirect('/jobs').json(savedJobOffer);
 
         } catch(error) {
             next(error);
