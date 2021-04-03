@@ -13,7 +13,7 @@ const jobOffers = [
         location: 'Madrid'
     },{
         creatorId: '6066ff5b1a93cae26ff59fbc',
-        position: 'senior Full-Stack Developer',
+        position: 'Senior Full-Stack Developer',
         company: 'Microsoft',
         description: 'Senior at Microsoft',
         contactEmail: 'senior@microsoft.com',
