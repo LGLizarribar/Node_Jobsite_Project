@@ -57,6 +57,10 @@
             <form action="/jobs/edit-offer/{{job._id}}" method="GET">
                 <button class="form-container__button" type="submit">Edit Offer</button>
             </form>
+            <form action="/jobs/delete-offer/?_method=DELETE" method="POST">
+                <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
+                <button class="form-container__button" type="submit">Delete</button>
+            </form>
         {{else}}
             <h3>Oferta no encontrada</h3>
         {{/if}}

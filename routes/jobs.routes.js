@@ -95,21 +95,18 @@ router.put('/edit-offer', async (req, res, next) => {
     }
 });
 
-router.delete('/delete-offer/:id', async (req, res, next) => {
-    const user = req.user;
-    const deleterId = user._id;
-    console.log(deleterId);
-
-    if(user){
+router.delete('/delete-offer', async (req, res, next) => {
+    if(req.user){
         try {
-            const { id } = req.params;
+            const deleterId = req.user._id;
+            const { id } = req.body;
             const { creatorId } = await JobOffer.findById(id);
             console.log(creatorId);
             if (creatorId.equals(deleterId)){
 
                 const deleted = await JobOffer.findByIdAndDelete(id);
 
-                if(deleted) return res.status(200).json('Offer deleted');
+                if(deleted) return res.redirect('/jobs');
 
                 return res.status(404).json('Offer not found');
             } else {
