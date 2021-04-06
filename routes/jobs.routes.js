@@ -64,7 +64,6 @@ router.get('/edit-offer/:id', async (req, res, next) => {
 router.put('/edit-offer', async (req, res, next) => {
     const user = req.user;
     const updaterId = user._id;
-    console.log('Updater ID: ', updaterId);
 
     if(user){
 
@@ -72,7 +71,7 @@ router.put('/edit-offer', async (req, res, next) => {
 
             const { id, position, company, description, contactEmail, location } = req.body;
             const { creatorId } = await JobOffer.findById(id);
-            console.log(creatorId);
+
             if(creatorId.equals(updaterId)) {
 
                 const updatedJobOffer = await JobOffer.findByIdAndUpdate(id,
@@ -101,7 +100,7 @@ router.delete('/delete-offer', async (req, res, next) => {
             const deleterId = req.user._id;
             const { id } = req.body;
             const { creatorId } = await JobOffer.findById(id);
-            console.log(creatorId);
+
             if (creatorId.equals(deleterId)){
 
                 const deleted = await JobOffer.findByIdAndDelete(id);
@@ -127,8 +126,7 @@ router.put('/apply', async (req, res, next) => {
         try {
             const applicantId = req.user._id;
             const { id } = req.body;
-            console.log(id);
-            console.log(applicantId);
+
             const appliedOffer = await JobOffer.findByIdAndUpdate(
                 id,
                 {

@@ -11,8 +11,6 @@ router.get('/register', (req, res, next) => {
 router.post('/register', (req, res, next) => {
     const { email, password } = req.body;
 
-    console.log('Registering user...', req.body);
-
     if(!email || !password) {
         const error = new Error('User and password are required');
         return res.render('register', {error: error.message});
@@ -32,7 +30,6 @@ router.get('/login', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
     const { email, password } = req.body;
-    console.log('Logueando usuario...', req.body);
 
     if(!email || !password) {
         const error = new Error('User and password are required');
