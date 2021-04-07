@@ -43,6 +43,9 @@
     </header>
     <main class="main-offers">
         {{#if job}}
+            {{#if job.companyLogo}}
+                <img class="header__logo" src="/uploads/{{job.companyLogo}}" alt="{{job.company}} logo">
+            {{/if}}
             <h1 class="main-offers__title">{{job.position}}</h1>
             <h4 class="main-offers__content">Empresa: {{job.company}}</h4>
             <p class="main-offers__content">Descripción: {{job.description}}</p>

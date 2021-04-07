@@ -27,6 +27,9 @@
     <main class="main-edit_offer">
         {{#if job}}
         <div class="main-offers">
+            {{#if job.companyLogo}}
+                <img class="header__logo" src="/uploads/{{job.companyLogo}}" alt="{{job.company}} logo">
+            {{/if}}
             <h1 class="main-offers__title">{{job.position}}</h1>
             <h4 class="main-offers__content">Empresa: {{job.company}}</h4>
             <p class="main-offers__content">Descripción: {{job.description}}</p>
@@ -36,7 +39,7 @@
             <p class="main-offers__content">Contacto: {{job.contactEmail}}</p>
         </div>
         <div class="form-container">
-            <form class="form-container__form" action="/jobs/edit-offer/?_method=PUT" method="POST">
+            <form class="form-container__form" action="/jobs/edit-offer/?_method=PUT" method="POST" enctype="multipart/form-data">
                 <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
                 <span class="form-container__field">
                     <label for="position">Puesto</label>
@@ -57,6 +60,10 @@
                 <span class="form-container__field">
                     <label for="contactEmail">Email de contacto</label>
                     <input type="text" id="contactEmail" name="contactEmail">
+                </span>
+                <span class="form-container__field">
+                    <label for="companyLogo">Logo de la empresa</label>
+                    <input type="file" id="companyLogo" name="companyLogo">
                 </span>
                 <button class="form-container__button" type="submit">Enviar</button>
             </form>

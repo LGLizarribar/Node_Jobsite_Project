@@ -3,6 +3,7 @@ const JobOffer = require('../models/JobOffer');
 const db = require('../db');
 const User = require('../models/User');
 const router = express.Router();
+const { upload } = require('../middlewares/files.middleware');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -19,13 +20,19 @@ router.get('/add-offer', (req, res, next) => {
     return res.render('add-offer', { user: req.user });
 })
 
-router.post('/add-offer', async (req, res, next) => {
+router.post('/add-offer', [upload.single('companyLogo')], async (req, res, next) => {
     const creatorId = req.user._id;
 
     try {
         const { position, company, description, contactEmail, location } = req.body;
 
-        const newJobOffer = new JobOffer({ creatorId, position, company, description, contactEmail, location });
+        let companyLogo;
+
+        if (req.file) {
+            companyLogo = req.file.filename;
+        }
+
+        const newJobOffer = new JobOffer({ creatorId, position, company, description, contactEmail, location, companyLogo });
 
         const savedJobOffer = await newJobOffer.save();
 
@@ -54,18 +61,25 @@ router.get('/edit-offer/:id', async (req, res, next) => {
     }
 })
 
-router.put('/edit-offer', async (req, res, next) => {
+router.put('/edit-offer', [upload.single('companyLogo')], async (req, res, next) => {
     const updaterId = req.user._id;
 
     try {
 
         const { id, position, company, description, contactEmail, location } = req.body;
+
+        let companyLogo;
+
+        if (req.file) {
+            companyLogo = req.file.filename;
+        }
+
         const { creatorId } = await JobOffer.findById(id);
 
         if (creatorId.equals(updaterId)) {
 
             const updatedJobOffer = await JobOffer.findByIdAndUpdate(id,
-                { position, company, description, contactEmail, location },
+                { position, company, description, contactEmail, location, companyLogo },
                 {
                     new: true
                 });

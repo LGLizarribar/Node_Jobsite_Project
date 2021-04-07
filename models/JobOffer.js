@@ -9,6 +9,7 @@ const jobOfferSchema = new Schema({
     description: {type: String, required: true},
     contactEmail: {type: String, required: true},
     location: {type: String, required: false},
+    companyLogo: {type: String, required: false},
     applicants: [{type: mongoose.Types.ObjectId, ref: 'User'}],
 },{
     timestamps: true,

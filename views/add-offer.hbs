@@ -39,7 +39,7 @@
     </header>
 
     <div class="form-container">
-        <form class="form-container__form" action="/jobs/add-offer" method="POST">
+        <form class="form-container__form" action="/jobs/add-offer" method="POST" enctype="multipart/form-data">
             <span class="form-container__field">
                 <label for="position">Puesto</label>
                 <input type="text" id="position" name="position">
@@ -59,6 +59,10 @@
             <span class="form-container__field">
                 <label for="contactEmail">Email de contacto</label>
                 <input type="text" id="contactEmail" name="contactEmail">
+            </span>
+            <span class="form-container__field">
+                <label for="companyLogo">Logo de la empresa</label>
+                <input type="file" id="companyLogo" name="companyLogo">
             </span>
             <button class="form-container__button" type="submit">Enviar</button>
         </form>
