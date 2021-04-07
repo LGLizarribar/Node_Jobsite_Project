@@ -10,6 +10,8 @@ const jobsRoutes = require('./routes/jobs.routes');
 const authRoutes = require('./routes/auth.routes');
 const db = require('./db.js');
 
+const { isAuthenticated } = require('./middlewares/auth.middleware');
+
 
 require('./passport/passport');
 
@@ -52,7 +54,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
 app.use('/', indexRoutes);
-app.use('/jobs', jobsRoutes);
+app.use('/jobs', [isAuthenticated], jobsRoutes);
 app.use('/auth', authRoutes);
 
 
