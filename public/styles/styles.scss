@@ -1,0 +1,117 @@
+html, body {
+    background-color: #caf0f8;
+    margin: 0;
+}
+
+.header {
+    background-color: #90e0ef;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+
+    &__logo{
+        height: 50px;
+        padding: 10px;
+        color: #03045e;
+    }
+
+    &__title {
+        color: #03045e;
+    }
+
+
+    &__navbar-container {
+        padding: 10px;
+    }
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    &__link-container{
+        margin-left: 10px;
+    }
+
+    &__link{
+        text-decoration: none;
+        border: none;
+        background-color: #90e0ef;
+        cursor: pointer;
+        color: #03045e;
+        font-family:Arial, Helvetica, sans-serif;
+        font-size: small;
+        margin-left: 10px;
+    }
+}
+
+.main{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-between;
+
+    &__title{
+        color: #03045e;
+    }
+
+    &__content{
+        color: #03045e
+    }
+}
+
+.form-container{
+    background:rgba(#0096c7,.9);
+    padding: 40px;
+    max-width: 600px;
+    margin: 40px auto;
+    border-radius: 4px;
+    box-shadow:0 4px 10px 4px rgba(#0096c7,.3);
+
+    &__form{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    &__field{
+        align-self: flex-start;
+        margin-bottom: 20px;
+    }
+
+    &__button{
+        border: 0;
+        outline: none;
+        border-radius: 1px;
+        padding: 15px;
+        font-size: medium;
+        background-color: #0077b6;
+
+        &:hover, &:focus {
+            background:#023e8a;
+        }
+    }
+}
+
+.main-offers{
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: space-between;
+
+    &__title{
+        color: #03045e;
+    }
+
+    &__content{
+        color: #03045e
+    }
+}

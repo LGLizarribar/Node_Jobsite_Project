@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Empleos</title>
+</head>
+<body>
+    <header class="header">
+        <span class="header__logo-container">
+            <img class="header__logo" src="/images/logo.png" alt="JobFinder logo">
+        </span>
+        <span>
+            <h1 class="header__title">JobFinder</h1>
+        </span>
+        <span class="header__navbar-container">
+            {{#if user}}
+                <navbar class="navbar">
+                    <span>
+                        <a class="navbar__link" href="/jobs">Volver</a>
+                    </span>
+                    <span>
+                        <a class="navbar__link" href="/jobs/add-offer">Crea una nueva oferta de empleo</a>
+                    </span>
+                    <form class="navbar__link-container" action="/auth/logout" method="POST">
+                        <button class="navbar__link" type="submit">Logout</button>
+                    </form>
+                </navbar>
+            {{else}}
+                <navbar class="navbar">
+                    <span class="navbar__link-container">
+                        <a class="navbar__link" href="/auth/login">Acceso</a>
+                    </span>
+                    <span class="navbar__link-container">
+                        <a class="navbar__link" href="/auth/register">Registro</a>
+                    </span>
+                </navbar>
+            {{/if}}
+        </span> 
+    </header>
+    <main class="main-offers">
+        <div>
+            <h1 class="main-offers__title">Nuestras Ofertas de Empleo
+        </div>
+        <ul>
+            {{#each jobOffers}}
+                <li>
+                    {{#if companyLogo}}
+                        <img class="header__logo" src="/uploads/{{companyLogo}}" alt="{{company}} logo">
+                    {{/if}}
+                    <h3 class="main-offers__content">Puesto: <a href="/jobs/{{_id}}">{{position}}</a></h3>
+                    <h4 class="main-offers__content">Empresa: {{company}}</h4>
+                </li>
+            {{/each}}
+        </ul>
+    </main>
+</body>
+</html>
