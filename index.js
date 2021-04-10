@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
@@ -5,10 +6,12 @@ const sassMiddleware = require('node-sass-middleware');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const db = require('./db.js');
 const indexRoutes = require('./routes/index.routes');
 const jobsRoutes = require('./routes/jobs.routes');
 const authRoutes = require('./routes/auth.routes');
-const db = require('./db.js');
+
+
 
 const { isAuthenticated } = require('./middlewares/auth.middleware');
 
@@ -17,12 +20,12 @@ require('./passport/passport');
 
 db.connect();
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const app = express();
 
 app.use(session({
-    secret: 'sdbaljsf*2524@',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
