@@ -138,7 +138,7 @@ router.get('/:id', async (req, res, next) => {
         const job = await JobOffer.findById(id);
 
         if (job) {
-            return res.render('job', { job, user: req.user, isAdmin: req.user.role === "admin"});
+            return res.render('job', { job, user: req.user, isAdmin: req.user.role === "admin", isCandidate: req.user.subRole === "candidate" });
         }
 
         return res.status(404).json('No job found for this ID');

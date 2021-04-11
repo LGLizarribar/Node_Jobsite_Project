@@ -58,10 +58,12 @@
                 <p class="main-offers__content">Localización: {{job.location}}</p>
             {{/if}}
             <p class="main-offers__content">Contacto: {{job.contactEmail}}</p>
+            {{#if isCandidate}}
             <form action="/jobs/apply/?_method=PUT" method="POST">
                 <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
                 <button class="form-container__button" type="submit">Apply</button>
             </form>
+            {{else}}
             <form action="/jobs/edit-offer/{{job._id}}" method="GET">
                 <button class="form-container__button" type="submit">Edit Offer</button>
             </form>
@@ -69,6 +71,7 @@
                 <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
                 <button class="form-container__button" type="submit">Delete</button>
             </form>
+            {{/if}}
         {{else}}
             <h3>Oferta no encontrada</h3>
         {{/if}}
