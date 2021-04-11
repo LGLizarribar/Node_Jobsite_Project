@@ -8,7 +8,7 @@ const { upload, uploadToCloudinary } = require('../middlewares/files.middleware'
 router.get('/', async (req, res, next) => {
     try {
         const jobOffers = await JobOffer.find();
-        return res.render('jobs', { jobOffers: jobOffers, user: req.user });
+        return res.render('jobs', { jobOffers: jobOffers, user: req.user, isAdmin: req.user.role === "admin"});
 
     } catch (error) {
         next(error);
@@ -138,7 +138,7 @@ router.get('/:id', async (req, res, next) => {
         const job = await JobOffer.findById(id);
 
         if (job) {
-            return res.render('job', { job, user: req.user });
+            return res.render('job', { job, user: req.user, isAdmin: req.user.role === "admin"});
         }
 
         return res.status(404).json('No job found for this ID');

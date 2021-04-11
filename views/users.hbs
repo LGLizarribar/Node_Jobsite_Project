@@ -16,7 +16,7 @@
             <h1 class="header__title">JobFinder</h1>
         </span>
         <span class="header__navbar-container">
-            {{#if user}}
+            {{#if isAdmin}}
                 <navbar class="navbar">
                     <span>
                         <a class="navbar__link" href="/">Volver</a>
@@ -27,36 +27,24 @@
                     <form class="navbar__link-container" action="/auth/logout" method="POST">
                         <button class="navbar__link" type="submit">Logout</button>
                     </form>
-                    {{#if isAdmin}}
-                    <span class="navbar__link-container">
-                        <a class="navbar__link" href="/auth/users">Usuarios Registrados</a>
-                    </span>
-                    {{/if}}
-                </navbar>
-            {{else}}
-                <navbar class="navbar">
-                    <span class="navbar__link-container">
-                        <a class="navbar__link" href="/auth/login">Acceso</a>
-                    </span>
-                    <span class="navbar__link-container">
-                        <a class="navbar__link" href="/auth/register">Registro</a>
-                    </span>
                 </navbar>
             {{/if}}
         </span> 
     </header>
     <main class="main-offers">
         <div>
-            <h1 class="main-offers__title">Nuestras Ofertas de Empleo</h1>
+            <h1 class="main-offers__title">Usuarios Registrados</h1>
         </div>
         <ul>
-            {{#each jobOffers}}
+            {{#each users}}
                 <li>
-                    {{#if companyLogo}}
-                        <img class="header__logo" src="{{companyLogo}}" alt="{{company}} logo">
-                    {{/if}}
-                    <h3 class="main-offers__content">Puesto: <a href="/jobs/{{_id}}">{{position}}</a></h3>
-                    <h4 class="main-offers__content">Empresa: {{company}}</h4>
+                    <h3 class="main-offers__content">Usuario: <a href="/auth/users/{{_id}}">{{email}}</a></h3>
+                    <p class="main-offers__content">Role: {{role}}</p>
+                    <p class="main-offers__content">Subrole: {{subRole}}</p>
+                    <form action="/auth/delete-user/?_method=DELETE" method="POST">
+                        <input class="main-offers__content" type="hidden" id="id" name="id" value={{_id}}>
+                    <button class="form-container__button" type="submit">Delete User</button>
+            </form>
                 </li>
             {{/each}}
         </ul>

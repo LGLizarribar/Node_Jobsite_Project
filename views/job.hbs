@@ -28,6 +28,11 @@
                     <form class="navbar__link-container" action="/auth/logout" method="POST">
                         <button class="navbar__link" type="submit">Logout</button>
                     </form>
+                    {{#if isAdmin}}
+                    <span class="navbar__link-container">
+                        <a class="navbar__link" href="/auth/users">Usuarios Registrados</a>
+                    </span>
+                    {{/if}}
                 </navbar>
             {{else}}
                 <navbar class="navbar">

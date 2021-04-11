@@ -41,13 +41,11 @@ const registerEstrategy = new LocalStrategy({
         }
 
         const hash = await bcrypt.hash(password, SALT_ROUNDS);
-        const role = "userRole";
 
         const newUser = new User({
             email,
             password: hash,
             subRole,
-            role,
         });
 
         const savedUser = await newUser.save();
