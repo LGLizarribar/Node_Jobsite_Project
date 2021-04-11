@@ -92,6 +92,7 @@ html, body {
         padding: 15px;
         font-size: medium;
         background-color: #0077b6;
+        width: 100px;
 
         &:hover, &:focus {
             background:#023e8a;
@@ -113,5 +114,17 @@ html, body {
 
     &__content{
         color: #03045e
+    }
+
+    &__button-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items:flex-start;
+        justify-content: space-between;
+    }
+
+    &__form-button {
+        margin-right: 10px;
     }
 }

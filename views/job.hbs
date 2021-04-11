@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/styles.css">
     {{#if job.position}}
-        <title>{{job.position}}</title>
+    <title>{{job.position}}</title>
     {{else}}
-        <title>Oferta de Empleo</title>
+    <title>Oferta de Empleo</title>
     {{/if}}
 </head>
+
 <body>
     <header class="header">
         <span class="header__logo-container">
@@ -21,60 +23,71 @@
         </span>
         <span class="header__navbar-container">
             {{#if user}}
-                <navbar class="navbar">
-                    <span>
-                        <a class="navbar__link" href="/">Volver</a>
-                    </span>
-                    <form class="navbar__link-container" action="/auth/logout" method="POST">
-                        <button class="navbar__link" type="submit">Logout</button>
-                    </form>
-                    {{#if isAdmin}}
-                    <span class="navbar__link-container">
-                        <a class="navbar__link" href="/auth/users">Usuarios Registrados</a>
-                    </span>
-                    {{/if}}
-                </navbar>
+            <navbar class="navbar">
+                <span>
+                    <a class="navbar__link" href="/">Volver</a>
+                </span>
+                <form class="navbar__link-container" action="/auth/logout" method="POST">
+                    <button class="navbar__link" type="submit">Logout</button>
+                </form>
+                {{#if isAdmin}}
+                <span class="navbar__link-container">
+                    <a class="navbar__link" href="/auth/users">Usuarios Registrados</a>
+                </span>
+                {{/if}}
+            </navbar>
             {{else}}
-                <navbar class="navbar">
-                    <span class="navbar__link-container">
-                        <a class="navbar__link" href="/auth/login">Acceso</a>
-                    </span>
-                    <span class="navbar__link-container">
-                        <a class="navbar__link" href="/auth/register">Registro</a>
-                    </span>
-                </navbar>
+            <navbar class="navbar">
+                <span class="navbar__link-container">
+                    <a class="navbar__link" href="/auth/login">Acceso</a>
+                </span>
+                <span class="navbar__link-container">
+                    <a class="navbar__link" href="/auth/register">Registro</a>
+                </span>
+            </navbar>
             {{/if}}
         </span>
     </header>
     <main class="main-offers">
         {{#if job}}
+        <div>
             {{#if job.companyLogo}}
-                <img class="header__logo" src="{{job.companyLogo}}" alt="{{job.company}} logo">
+            <img class="header__logo" src="{{job.companyLogo}}" alt="{{job.company}} logo">
             {{/if}}
             <h1 class="main-offers__title">{{job.position}}</h1>
             <h4 class="main-offers__content">Empresa: {{job.company}}</h4>
             <p class="main-offers__content">Descripción: {{job.description}}</p>
             {{#if job.location}}
-                <p class="main-offers__content">Localización: {{job.location}}</p>
+            <p class="main-offers__content">Localización: {{job.location}}</p>
             {{/if}}
             <p class="main-offers__content">Contacto: {{job.contactEmail}}</p>
+        </div>
+        <div class="main-offers__button-container">
             {{#if isCandidate}}
-            <form action="/jobs/apply/?_method=PUT" method="POST">
-                <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
-                <button class="form-container__button" type="submit">Apply</button>
-            </form>
+            <span class="main-offers__form-button">
+                <form action="/jobs/apply/?_method=PUT" method="POST">
+                    <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
+                    <button class="form-container__button" type="submit">Apply</button>
+                </form>"
+            </span>
             {{else}}
-            <form action="/jobs/edit-offer/{{job._id}}" method="GET">
-                <button class="form-container__button" type="submit">Edit Offer</button>
-            </form>
-            <form action="/jobs/delete-offer/?_method=DELETE" method="POST">
-                <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
-                <button class="form-container__button" type="submit">Delete</button>
-            </form>
+            <span class="main-offers__form-button">
+                <form action="/jobs/edit-offer/{{job._id}}" method="GET">
+                    <button class="form-container__button" type="submit">Edit Offer</button>
+                </form>
+            </span>
+            <span class="main-offers__form-button">
+                <form action="/jobs/delete-offer/?_method=DELETE" method="POST">
+                    <input class="main-offers__content" type="hidden" id="id" name="id" value={{job._id}}>
+                    <button class="form-container__button" type="submit">Delete</button>
+                </form>
+            </span>
             {{/if}}
+        </div>
         {{else}}
-            <h3>Oferta no encontrada</h3>
+        <h3>Oferta no encontrada</h3>
         {{/if}}
     </main>
 </body>
+
 </html>
