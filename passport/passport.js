@@ -19,12 +19,27 @@ passport.deserializeUser(async (userId, done) => {
 
 const SALT_ROUNDS = 10;
 
+const validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
 const registerEstrategy = new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true,
 }, async (req, email, password, done) => {
     try {
+        if(email.length < 6) {
+            const error = new Error('Email must be at least 6 characters');
+            return done(error);
+        }
+
+        if(!validateEmail(email)) {
+            const error = new Error('Invalid email, please add a valid one');
+            return done(error);
+        }
+
         const { subRole } = req.body
         const previousUser = await User.findOne({email});
 
