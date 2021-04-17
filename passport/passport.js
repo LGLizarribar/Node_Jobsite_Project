@@ -4,13 +4,6 @@ const bcrypt = require('bcrypt');
 
 const User = require('../models/User');
 
-/**
- * {
- *      email: 'laura@upgrade.com',
- *      password: '12345'
- * }
- */
-
 passport.serializeUser((user, done) => {
     return done(null, user._id);
 });
